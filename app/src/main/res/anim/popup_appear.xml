@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created at 10/3/19 10:44 PM by Khoa
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <scale
+        android:duration="200"
+        android:fromXScale="1.2"
+        android:fromYScale="1.2"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1.0"
+        android:toYScale="1.0" />
+</set>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScheduleView">
+        <attr name="schedule_labelTextColor" format="color"/>
+        <attr name="schedule_labelBackgroundColor" format="color"/>
+        <attr name="schedule_labelTextSize" format="dimension"/>
+        <attr name="schedule_separateColor" format="color"/>
+        <attr name="schedule_separateWidth" format="dimension"/>
+        <attr name="schedule_paddingHorizontalLabel" format="dimension"/>
+        <attr name="schedule_paddingVerticalLabel" format="dimension"/>
+        <attr name="schedule_subjectBackgroundColor" format="color"/>
+        <attr name="schedule_subjectTextColor" format="color"/>
+        <attr name="schedule_subjectTextSize" format="dimension"/>
+        <attr name="schedule_roomTextColor" format="color"/>
+        <attr name="schedule_addableEvent" format="boolean"/>
+    </declare-styleable>
+</resources>

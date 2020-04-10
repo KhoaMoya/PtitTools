@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Cập nhật dữ liệu">
+        <SwitchPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/auto_update"
+            app:title="Tự động cập nhật" />
+        <ListPreference
+            app:defaultValue="2"
+            app:dependency="@string/auto_update"
+            app:dialogTitle="Chọn thời gian"
+            app:entries="@array/pref_time_entries"
+            app:entryValues="@array/pref_time_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/periodic_update"
+            app:title="Thời gian giữa 2 lần cập nhật"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:dependency="@string/auto_update"
+            app:key="@string/show_notification"
+            app:title="Hiển thị thông báo khi dữ liệu thay đổi" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="About">
+        <Preference
+            app:iconSpaceReserved="false"
+            app:summary="3.0"
+            app:title="Version" />
+    </PreferenceCategory>
+</PreferenceScreen>

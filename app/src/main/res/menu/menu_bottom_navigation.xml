@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/page_schedule"
+        android:icon="@drawable/ic_schedule"
+        android:title="Thời khóa biểu"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/page_exam"
+        android:icon="@drawable/ic_exam"
+        android:title="Lịch thi"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/page_news"
+        android:icon="@drawable/ic_news"
+        android:title="Tin tức"
+        app:showAsAction="always" />
+    <!--    <item android:id="@+id/page_tin_nhan"-->
+    <!--        android:icon="@drawable/tin_nhan"-->
+    <!--        android:title="Tin nhắn"-->
+    <!--        app:showAsAction="always"/>-->
+    <item
+        android:id="@+id/page_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Cá nhân"
+        app:showAsAction="always" />
+</menu>

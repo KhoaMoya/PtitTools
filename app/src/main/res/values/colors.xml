@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#512DA8</color>
+    <color name="colorPrimary10">#1A512DA8</color>
+    <color name="colorPrimary20">#33512DA8</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="colorAccent">#512DA8</color>
+    <color name="colorAccentDark">#512DA8</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorWhite5">#0DFFFFFF</color>
+    <color name="colorWhite25">#40BFBFBF</color>
+    <color name="colorWhite50">#80BFBFBF</color>
+    <color name="colorWhite75">#BFBFBFBF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlack10">#1A000000</color>
+    <color name="colorBlack5">#0D000000</color>
+    <color name="colorBlack25">#40000000</color>
+    <color name="colorBlack50">#80000000</color>
+    <color name="colorBlack75">#BF000000</color>
+    <color name="colorGray">#E2E2E2</color>
+    <color name="colorRed">#DB1F14</color>
+    <color name="colorDrakBlue">#3F51B5</color>
+    <color name="colorBlue">#1976D2</color>
+    <color name="colorMatteBlack">#2B2B2B</color>
+    <color name="colorPurple">#9C27B0</color>
+    <color name="color1">#E30102</color>
+    <color name="color2">#FFA00E</color>
+    <color name="color3">#FFD539</color>
+    <color name="color4">#AEDD62</color>
+    <color name="color5">#CFE0E6</color>
+    <color name="color6">#7CB4C8</color>
+    <color name="color7">#1D89B3</color>
+    <color name="color8">#0911A3</color>
+    <color name="color9">#000000</color>
+</resources>

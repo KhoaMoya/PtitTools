@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created at 3/9/20 9:25 PM by Khoa
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/colorWhite"/>
+    <corners android:radius="8dp"/>
+</shape>

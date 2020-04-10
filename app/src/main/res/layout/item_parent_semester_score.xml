@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_clickable">
+
+        <TextView
+            android:id="@+id/txt_ten_hoc_ky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="37dp"
+            android:padding="13dp"
+            android:layout_centerVertical="true"
+            android:text="Hoc ky 1 nam hoc 2018-2019"
+            android:textColor="@color/colorBlack"/>
+
+        <ImageView
+            android:id="@+id/img_expand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:alpha="0.5"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_next"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBlack5" />
+</LinearLayout>

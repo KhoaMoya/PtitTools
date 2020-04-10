@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.khoa.ptittools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon_app"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_app"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme_Main"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <receiver
+            android:name=".base.receiver.BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".switch_accounts.view.SwitchAccountsActivity"
+            android:label="Chuyển tài khoản"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".setting.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <receiver
+            android:name=".base.receiver.AutoUpdateReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".Test_2Activity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".TestActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login.view.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeLogin"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".main.view.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".news.view.DetailNewsActivity"
+            android:parentActivityName=".main.view.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tuition.view.TuitionActivity"
+            android:parentActivityName=".main.view.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Second">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".score.view.ScoreActivity"
+            android:parentActivityName=".main.view.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Second" />
+    </application>
+
+</manifest>

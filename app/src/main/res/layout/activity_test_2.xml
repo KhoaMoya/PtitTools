@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/collapsing_header_arc"
+    android:background="@color/colorBlack5"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="10dp"
+            android:text="Introduction
+MotionLayout is a new layout focusing on animation, provided with the ConstraintLayout 2.0 library. The previous articles in this series provide a great overview of the system; I would highly encourage you to start with them before reading this article.
+Introduction to MotionLayout (part I)
+Custom attributes, image transitions, keyframes (part II)
+Taking advantage of MotionLayout in your existing layouts (CoordinatorLayout, DrawerLayout, ViewPager) (part III)
+The MotionLayout animation system works by interpolating values (typically, position/size of widgets) between two states, specified using the full Constraint system of ConstraintLayout, as well as view attributes. The transition between those two states can also be driven entirely by touch. This system will generally give you great results for your transitions.
+In addition to states, MotionLayout also supports Keyframes — briefly introduced in part II of this series— which we are going to cover in depth in this article. Note that while keyframes are great, it’s definitely a more specialized tool; one you may not need, or need only sporadically.
+Keep in mind that adding motion in your application should be meaningful; don’t over do it!
+But, should you need extra capabilities to define your transition, keyframes will expand what you can do with MotionLayout. As you will see, there is a lot to cover:
+Keyframes
+Position Keyframes
+Arc Motion
+Easing
+Attributes Keyframes
+Cycle Keyframes  TimeCycle Keyframes (which we will cover in part V)
+Keyframes : a Rendez-vous in Time
+At a high level, Keyframes allow you to specify a change, at a given time during the interpolation between two states.
+
+There are different types of Keyframes supported by MotionLayout:
+Position keyframe : KeyPosition
+Attribute keyframe : KeyAttribute
+Cycle keyframe : KeyCycle
+TimeCycle keyframe : KeyTimeCycle
+Note that each type of keyframe is independent from the others — that is, you don’t need to define all of them at the same points (but you cannot define at the same point multiple keyframes of the same type)
+Common Attributes
+All keyframes (Position, Attribute, Cycle, TimeCycle) share some common attributes:
+motion:framePosition : when does the keyframe apply during the transition (from 0 to 100)
+motion:target : which object is affect by this keyframe
+motion:transitionEasing : which easing curve to use (default is linear)
+motion:curveFit : spline (default) or linear — which interpolation curve is fitted to the keyframes. The default is a monotonic spline curve, making for smoother transitions, but you can decide to have linear segments instead.
+Position Keyframes
+The position keyframes are likely going to be the most common keyframes you will encounter or use. They allow you to modify the path a widget will take on screen during a transition. For example, let’s take the following animation of a single widget, contained in a MotionLayout (“parent”):
+
+We have a start (bottom left) and end (top right) states, and the motion path is simply the linear interpolation between those two states — the widget will move in a straight line.
+
+By introducing a position keyframe, we can change the motion path to a curved motion:
+
+
+Adding more keyframes will allow you to create complex motion paths."/>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <View
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:elevation="4dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </View>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="23sp"
+        android:elevation="4dp"
+        android:text="I love paris"
+        android:textColor="@android:color/white"
+        />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

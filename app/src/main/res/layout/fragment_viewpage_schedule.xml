@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.khoa.scheduleview.ScheduleView
+        android:id="@+id/schecule_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F4F4F4"
+        app:schedule_addableEvent="false"
+        app:schedule_labelBackgroundColor="@color/colorBlack5"
+        app:schedule_labelTextColor="@color/colorBlack"
+        app:schedule_labelTextSize="9sp"
+        app:schedule_roomTextColor="@color/colorPrimary"
+        app:schedule_separateColor="@color/colorBlack25"
+        app:schedule_subjectBackgroundColor="@color/colorWhite"
+        app:schedule_subjectTextColor="@color/colorBlack" />
+
+</LinearLayout>

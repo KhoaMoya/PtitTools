@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".switch_accounts.view.SwitchAccountsActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/account_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/txt_add_account"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:listitem="@layout/item_account"
+        tools:itemCount="4"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <TextView
+        android:id="@+id/txt_add_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm tài khoản"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_selectable_primary_corner8"
+        android:paddingVertical="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="17sp"/>
+
+</RelativeLayout>
