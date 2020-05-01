@@ -406,6 +406,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         // set data
         mBinding.lineChart.setData(data);
+        mBinding.lineChart.invalidate();
     }
 
     @Override

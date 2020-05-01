@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".MyApplication"
@@ -17,12 +16,21 @@
         android:theme="@style/AppTheme_Main"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <receiver
             android:name=".base.receiver.BootCompletedReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
@@ -100,6 +108,13 @@
             android:parentActivityName=".main.view.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Second" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon_app" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
     </application>
 
 </manifest>

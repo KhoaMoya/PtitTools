@@ -29,10 +29,8 @@ import com.khoa.ptittools.main.view.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -85,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showUserList(List<User> list) {
         List<String> stringList = new ArrayList<>();
-        for (User user : list) stringList.add(user.maSV + " - " + user.ten);
+        for (User user : list) stringList.add(user.ten + " - " + user.maSV);
         mBinding.lvUser.setAdapter(new ArrayAdapter<>(this, R.layout.simple_list_item, stringList));
     }
 

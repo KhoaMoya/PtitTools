@@ -26,12 +26,6 @@ import java.util.List;
 
 public class AutoUpdateReceiver extends BroadcastReceiver implements ScheduleDownloaderListener {
 
-    private final int NEW_SCHEDULE_NOTIFICATION_ID = 1;
-    public static final int NEW_NEWS_NOTIFICATION_ID = 2;
-    private final int NEW_TUITION_NOTIFICATION_ID = 3;
-    private final int NEW_SCORE_NOTIFICATION_ID = 4;
-    private final int NEW_EXAM_NOTIFICATION_ID = 5;
-
     private AppRepository appRepository;
     private NotificationHelper notificationHelper;
 
@@ -137,13 +131,13 @@ public class AutoUpdateReceiver extends BroadcastReceiver implements ScheduleDow
     }
 
     private void showScheduleNotification() {
-        NotificationCompat.Builder builder = notificationHelper.getScheduleNotification("Thời khóa biểu", "Nhấn để xem thời khóa biểu mới");
-        notificationHelper.getNotificationManager().notify(NEW_SCHEDULE_NOTIFICATION_ID, builder.build());
+        NotificationCompat.Builder builder = notificationHelper.getNotification("Thời khóa biểu", "Nhấn để xem thời khóa biểu mới");
+        notificationHelper.getNotificationManager().notify(NotificationHelper.NEW_SCHEDULE_NOTIFICATION_ID, builder.build());
     }
 
     private void showExamNotification() {
         NotificationCompat.Builder builder = notificationHelper.getExamNotification("Lịch thi", "Nhấn để xem lịch thi mới");
-        notificationHelper.getNotificationManager().notify(NEW_EXAM_NOTIFICATION_ID, builder.build());
+        notificationHelper.getNotificationManager().notify(NotificationHelper.NEW_EXAM_NOTIFICATION_ID, builder.build());
     }
 
     private void showNewsNotification() {
@@ -155,7 +149,7 @@ public class AutoUpdateReceiver extends BroadcastReceiver implements ScheduleDow
         String content = "Nhấn để xem học phí mới";
         NotificationCompat.Builder builder = notificationHelper
                 .getChildActivityNotification(NotificationHelper.NEW_TUITION_PENDING_INTENT_ID, title, content, TuitionActivity.class);
-        notificationHelper.getNotificationManager().notify(NEW_TUITION_NOTIFICATION_ID, builder.build());
+        notificationHelper.getNotificationManager().notify(NotificationHelper.NEW_TUITION_NOTIFICATION_ID, builder.build());
     }
 
     private void showScoreNotification() {
@@ -163,7 +157,7 @@ public class AutoUpdateReceiver extends BroadcastReceiver implements ScheduleDow
         String content = "Nhấn để xem điểm thi mới";
         NotificationCompat.Builder builder = notificationHelper
                 .getChildActivityNotification(NotificationHelper.NEW_SCORE_PENDING_INTENT_ID, title, content, ScoreActivity.class);
-        notificationHelper.getNotificationManager().notify(NEW_SCORE_NOTIFICATION_ID, builder.build());
+        notificationHelper.getNotificationManager().notify(NotificationHelper.NEW_SCORE_NOTIFICATION_ID, builder.build());
     }
 
     private void showCountUpdateTimeNotification() {

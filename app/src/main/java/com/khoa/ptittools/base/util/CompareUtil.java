@@ -39,7 +39,7 @@ public class CompareUtil {
             if (!equalsList(oldWeek.subjectList, newSemester.weekList.get(i).subjectList)) {
                 String str1 = ConvertersUtil.fromObject(oldWeek);
                 String str2 = ConvertersUtil.fromObject(newSemester.weekList.get(i));
-                FirebaseDatabaseHelper.writeData(FirebaseDatabaseHelper.Schedule_Path, str1, str2);
+                FirebaseDatabaseHelper.saveDiffirentData(FirebaseDatabaseHelper.Schedule_Type, str1, str2);
                 return true;
             }
         }
@@ -66,7 +66,7 @@ public class CompareUtil {
             String str1 = ConvertersUtil.fromList(oldNewsList);
             String str2 = ConvertersUtil.fromList(newsList);
 
-            FirebaseDatabaseHelper.writeData(FirebaseDatabaseHelper.News_Path, str1, str2);
+            FirebaseDatabaseHelper.saveDiffirentData(FirebaseDatabaseHelper.News_Type, str1, str2);
             return newsList.get(0);
         }
 
@@ -86,7 +86,7 @@ public class CompareUtil {
             String str1 = ConvertersUtil.fromObject(oldTuition);
             String str2 = ConvertersUtil.fromObject(newTuition);
 
-            FirebaseDatabaseHelper.writeData(FirebaseDatabaseHelper.Tuition_Path, str1, str2);
+            FirebaseDatabaseHelper.saveDiffirentData(FirebaseDatabaseHelper.Tuition_Type, str1, str2);
             return true;
         }
 
@@ -111,7 +111,7 @@ public class CompareUtil {
             String str1 = ConvertersUtil.fromObject(oldExam);
             String str2 = ConvertersUtil.fromObject(newExam);
             if (!str1.equals(str2)) {
-                FirebaseDatabaseHelper.writeData(FirebaseDatabaseHelper.Exam_Path, str1, str2);
+                FirebaseDatabaseHelper.saveDiffirentData(FirebaseDatabaseHelper.Exam_Type, str1, str2);
                 return true;
             }
         }
@@ -135,7 +135,7 @@ public class CompareUtil {
             if (!equalsList(oldSemesterScore.subjectScoreList, newSemesterScore.subjectScoreList)) {
                 String str1 = ConvertersUtil.fromList(oldSemesterScore.subjectScoreList);
                 String str2 = ConvertersUtil.fromList(newSemesterScore.subjectScoreList);
-                FirebaseDatabaseHelper.writeData(FirebaseDatabaseHelper.Score_Path, str1, str2);
+                FirebaseDatabaseHelper.saveDiffirentData(FirebaseDatabaseHelper.Score_Type, str1, str2);
                 return true;
             }
         }

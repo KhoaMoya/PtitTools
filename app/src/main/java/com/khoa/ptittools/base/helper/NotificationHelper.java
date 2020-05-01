@@ -35,11 +35,18 @@ public class NotificationHelper {
 
     public final static String NEW_DATA_CHANNEL_ID = "auto_update_channel_id";
     public final static String NewDataChannelDescription = "New date from web";
-    public final static int NEW_SCHEDULE_PENDING_INTENT_ID = 423;
+    public final static int NEW_NOTIFICATION_PENDING_INTENT_ID = 423;
     public final static int NEW_EXAM_PENDING_INTENT_ID = 563;
     public final static int NEW_NEWS_PENDING_INTENT_ID = 805;
     public final static int NEW_TUITION_PENDING_INTENT_ID = 543;
     public final static int NEW_SCORE_PENDING_INTENT_ID = 947;
+
+    public static final int NEW_SCHEDULE_NOTIFICATION_ID = 1;
+    public static final int NEW_NEWS_NOTIFICATION_ID = 2;
+    public static final int NEW_TUITION_NOTIFICATION_ID = 3;
+    public static final int NEW_SCORE_NOTIFICATION_ID = 4;
+    public static final int NEW_EXAM_NOTIFICATION_ID = 5;
+    public static final int FCM_NOTICATION_ID = 6;
 
     private Context context;
     private static NotificationHelper instance;
@@ -71,11 +78,11 @@ public class NotificationHelper {
         }
     }
 
-    public NotificationCompat.Builder getScheduleNotification(String title, String content) {
+    public NotificationCompat.Builder getNotification(String title, String content) {
         Intent openAppIntent = new Intent(context, MainActivity.class);
         openAppIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, NEW_SCHEDULE_PENDING_INTENT_ID, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, NEW_NOTIFICATION_PENDING_INTENT_ID, openAppIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
@@ -86,7 +93,6 @@ public class NotificationHelper {
                 .setContentTitle(title)
                 .setContentText(content)
                 .setColor(Color.GREEN)
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0, 300, 150, 300})
                 .setContentIntent(pendingIntent);
     }
@@ -107,7 +113,6 @@ public class NotificationHelper {
                 .setContentTitle(title)
                 .setContentText(content)
                 .setColor(Color.GREEN)
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0, 300, 150, 300})
                 .setContentIntent(pendingIntent);
     }
@@ -167,11 +172,10 @@ public class NotificationHelper {
                     .setContentText(news.summary)
                     .setLargeIcon(bitmap)
                     .setColor(Color.GREEN)
-                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setVibrate(new long[]{0, 300, 150, 300})
                     .setContentIntent(pendingIntent);
 
-            getNotificationManager().notify(AutoUpdateReceiver.NEW_NEWS_NOTIFICATION_ID, builder.build());
+            getNotificationManager().notify(NEW_NEWS_NOTIFICATION_ID, builder.build());
         }
     }
 
@@ -193,7 +197,6 @@ public class NotificationHelper {
                 .setContentTitle(title)
                 .setContentText(content)
                 .setColor(Color.GREEN)
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0, 300, 150, 300})
                 .setContentIntent(pendingIntent);
     }
@@ -211,7 +214,6 @@ public class NotificationHelper {
                 .setSmallIcon(R.drawable.icon_app)
                 .setContentTitle("Số lần cập nhập: " + count)
                 .setColor(Color.GREEN)
-                .setSmallIcon(R.mipmap.ic_launcher)
                 .setVibrate(new long[]{0, 300, 150, 300});
     }
 }

@@ -19,6 +19,10 @@ public class User {
     public String matKhau = "";
     @ColumnInfo(name = "ten")
     public String ten;
+    @ColumnInfo(name = "token")
+    public String token = "";
+    @ColumnInfo(name = "tokennode")
+    public String tokenNode;
 
     @Ignore
     public String cookie = "";
@@ -36,15 +40,18 @@ public class User {
     }
 
     @Ignore
-    public User(@NonNull String maSV, String matKhau, String cookie, String viewState) {
+    public User(@NonNull String maSV, String matKhau, String ten, String token, String tokenNode, String cookie, String viewState) {
         this.maSV = maSV;
         this.matKhau = matKhau;
+        this.ten = ten;
+        this.token = token;
+        this.tokenNode = tokenNode;
         this.cookie = cookie;
         this.viewState = viewState;
     }
 
     @Ignore
-    public void setCookieAndViewState(String[] values){
+    public void setCookieAndViewState(String[] values) {
         this.cookie = values[0];
         this.viewState = values[1];
     }

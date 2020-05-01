@@ -141,7 +141,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationItemSe
         FragmentManager childFragmentManager = mMainViewModel.currentFragment.getChildFragmentManager();
         if (childFragmentManager.getBackStackEntryCount() == 0) {
             if (mMainViewModel.backStack.isEnd()) {
-                finish();
+                String fragmentTag = mMainViewModel.backStack.get(0);
+                if(!fragmentTag.equals(ScheduleFragment.TAG)){
+                    mMainViewModel.backStack.remove(0);
+                    swapFragment(ScheduleFragment.TAG, true);
+                }else {
+                    finish();
+                }
             } else {
                 backFragment();
             }

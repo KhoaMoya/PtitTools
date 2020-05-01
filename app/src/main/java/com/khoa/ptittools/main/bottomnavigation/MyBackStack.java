@@ -24,4 +24,13 @@ public class MyBackStack {
     public boolean isEnd() {
         return backStack.size() <= 1;
     }
+
+    public String get(int position){
+        if(position<0 || position>=backStack.size()) return "";
+        return backStack.get(position);
+    }
+
+    public void remove(int position){
+        backStack.remove(position);
+    }
 }

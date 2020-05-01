@@ -94,6 +94,10 @@ public class AppRepository extends SharedPreferencesHelper {
         appDatabase.userDAO().insertUser(user);
     }
 
+    public void updateUser(User user){
+        appDatabase.userDAO().updateUser(user);
+    }
+
     public void insertSemester(Semester semester) {
         appDatabase.semesterDAO().insertSemester(semester);
     }

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created at 10/21/19 9:13 PM by Khoa
-  -->
+<?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -57,9 +55,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Tổng quan"
-                android:layout_marginStart="16dp"
+                android:background="@color/colorBlack5"
+                android:padding="10dp"
                 android:textColor="@color/colorBlack"/>
 
             <include
@@ -73,9 +71,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Điểm các kỳ"
-                android:layout_marginStart="16dp"
+                android:background="@color/colorBlack5"
+                android:padding="10dp"
                 android:textColor="@color/colorBlack"/>
 
             <com.github.mikephil.charting.charts.LineChart

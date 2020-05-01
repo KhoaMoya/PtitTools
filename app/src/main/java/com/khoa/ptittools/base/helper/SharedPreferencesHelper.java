@@ -2,7 +2,6 @@ package com.khoa.ptittools.base.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.khoa.ptittools.MyApplication;
 import com.khoa.ptittools.R;
@@ -18,8 +17,8 @@ public class SharedPreferencesHelper {
         this.sharedPreferences = MyApplication.getContext().getSharedPreferences(SharedPreferences_File, Context.MODE_PRIVATE);
     }
 
-    public static SharedPreferencesHelper getInstance(){
-        if(instance == null) {
+    public static SharedPreferencesHelper getInstance() {
+        if (instance == null) {
             instance = new SharedPreferencesHelper();
         }
         return instance;
@@ -29,17 +28,24 @@ public class SharedPreferencesHelper {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("ma_sv", user.maSV);
         editor.putString("mat_khau", user.matKhau);
+        editor.putString("ten", user.ten);
         editor.putString("cookie", user.cookie);
         editor.putString("view_state", user.viewState);
+        editor.putString("token", user.token);
+        editor.putString("tokennode", user.tokenNode);
         editor.apply();
     }
 
     public synchronized User takeUser() {
         String maSV = sharedPreferences.getString("ma_sv", "");
         String matKhau = sharedPreferences.getString("mat_khau", "");
+        String ten = sharedPreferences.getString("ten", "");
         String cookie = sharedPreferences.getString("cookie", "");
         String viewState = sharedPreferences.getString("view_state", "");
-        return new User(maSV, matKhau, cookie, viewState);
+        String token = sharedPreferences.getString("token", "");
+        String tokenNode = sharedPreferences.getString("tokennode", "");
+        // String maSV, String matKhau, String ten, String token, String tokenNode, String cookie, String viewState
+        return new User(maSV, matKhau, ten, token, tokenNode, cookie, viewState);
     }
 
     public void setFirstTime(boolean firstTime) {
@@ -52,7 +58,7 @@ public class SharedPreferencesHelper {
         return sharedPreferences.getBoolean("first_time", true);
     }
 
-    public void setPeriodicValue(String value){
+    public void setPeriodicValue(String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(MyApplication.getContext().getString(R.string.periodic_update), value);
         editor.apply();
@@ -65,7 +71,7 @@ public class SharedPreferencesHelper {
         return time;
     }
 
-    public boolean ishowNotification(){
+    public boolean ishowNotification() {
         return sharedPreferences.getBoolean(MyApplication.getContext().getString(R.string.show_notification), true);
     }
 
@@ -76,13 +82,13 @@ public class SharedPreferencesHelper {
         editor.apply();
     }
 
-    public void setCountUpdateTime(int count){
+    public void setCountUpdateTime(int count) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("count_update_time", count);
         editor.apply();
     }
 
-    public int getCountUpdateTime(){
+    public int getCountUpdateTime() {
         return sharedPreferences.getInt("count_update_time", 0);
     }
 }
