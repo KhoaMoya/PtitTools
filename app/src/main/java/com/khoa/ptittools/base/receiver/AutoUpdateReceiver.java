@@ -19,8 +19,8 @@ import com.khoa.ptittools.base.net.Downloader;
 import com.khoa.ptittools.base.net.ScheduleDownloaderListener;
 import com.khoa.ptittools.base.repository.AppRepository;
 import com.khoa.ptittools.base.util.CompareUtil;
-import com.khoa.ptittools.score.view.ScoreActivity;
-import com.khoa.ptittools.tuition.view.TuitionActivity;
+import com.khoa.ptittools.ui.score.view.ScoreActivity;
+import com.khoa.ptittools.ui.tuition.view.TuitionActivity;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class AutoUpdateReceiver extends BroadcastReceiver implements ScheduleDow
             this.notificationHelper = MyApplication.getNotificationHelper();
             this.isShowNotification = appRepository.ishowNotification();
 
-            showCountUpdateTimeNotification();
+//            showCountUpdateTimeNotification();
 
             new Thread(getWorker()).start();
         }

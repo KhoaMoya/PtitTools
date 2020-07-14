@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.khoa.ptittools.base.model.User;
 import com.khoa.ptittools.base.repository.AppRepository;
-import com.khoa.ptittools.login.view.LoginActivity;
-import com.khoa.ptittools.main.view.MainActivity;
+import com.khoa.ptittools.ui.login.view.LoginActivity;
+import com.khoa.ptittools.ui.main.view.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

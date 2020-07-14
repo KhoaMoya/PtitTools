@@ -22,7 +22,7 @@ public class CompareUtil {
         if (newSemester == null) return false;
 
         User user = appRepository.takeUser();
-        Semester oldSemester = appRepository.getSemester(user.maSV);
+        Semester oldSemester = appRepository.getSemester(user.maSV, appRepository.getCurrentSemesterCode(user.maSV));
 
         if (oldSemester == null) return true;
         if (!newSemester.semesterCode.equals(oldSemester.semesterCode)) return true;

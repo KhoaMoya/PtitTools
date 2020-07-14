@@ -1,6 +1,7 @@
 package com.khoa.ptittools.base.util;
 
 import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,6 +1,7 @@
 package com.khoa.ptittools.base.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.khoa.ptittools.MyApplication;
 import com.khoa.ptittools.base.model.Exam;
@@ -15,11 +16,11 @@ import com.khoa.ptittools.base.model.Week;
 import com.khoa.ptittools.base.repository.AppRepository;
 import com.khoa.ptittools.base.util.ParseResponse;
 import com.khoa.ptittools.base.util.TimeUtil;
-import com.khoa.ptittools.exam.util.ParseResponseExam;
-import com.khoa.ptittools.news.util.ParseResponseNews;
-import com.khoa.ptittools.schedule.util.ParseResponseSchedule;
-import com.khoa.ptittools.score.util.ParseResponseScore;
-import com.khoa.ptittools.tuition.util.ParseResponseTuition;
+import com.khoa.ptittools.ui.exam.util.ParseResponseExam;
+import com.khoa.ptittools.ui.news.util.ParseResponseNews;
+import com.khoa.ptittools.ui.schedule.util.ParseResponseSchedule;
+import com.khoa.ptittools.ui.score.util.ParseResponseScore;
+import com.khoa.ptittools.ui.tuition.util.ParseResponseTuition;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class Downloader {
 
-    private static Context getContext(){
+    private static Context getContext() {
         return MyApplication.getContext();
     }
 
@@ -65,6 +66,40 @@ public class Downloader {
                 .method(Connection.Method.POST)
                 .timeout(10000)
                 .execute();
+        return response;
+    }
+
+    /*
+    __EVENTTARGET: ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK
+__EVENTARGUMENT:
+__LASTFOCUS:
+__VIEWSTATE:
+__VIEWSTATEGENERATOR: CA0B0334
+ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK: 20193
+ctl00$ContentPlaceHolder1$ctl00$ddlLoai: 0
+ctl00$ContentPlaceHolder1$ctl00$ddlTuan: Tuần 33 [Từ 23/03/2020 -- Đến 29/03/2020]
+     */
+
+    public static Connection.Response postSemester(User user, String url, String semesterCode) {
+        Connection.Response response = null;
+        try {
+            response = Jsoup.connect(url)
+                    .data("ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK", semesterCode)
+                    .data("ctl00$ContentPlaceHolder1$ctl00$ddlLoai", "0")
+                    .data("__EVENTTARGET", "ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK")
+//                    .data("ctl00$ContentPlaceHolder1$ctl00$ddlTuan", "Tuần 33 [Từ 23/03/2020 -- Đến 29/03/2020")
+                    .data("__EVENTARGUMENT", "")
+                    .data("__LASTFOCUS", "")
+                    .data("__VIEWSTATE", user.viewState)
+                    .data("__VIEWSTATEGENERATOR", "CA0B0334")
+                    .cookie("ASP.NET_SessionId", user.cookie)
+                    .header("Connection", "keep-alive")
+                    .method(Connection.Method.POST)
+                    .timeout(10000)
+                    .execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return response;
     }
 
@@ -149,7 +184,7 @@ public class Downloader {
 
         AppRepository appRepository = MyApplication.getAppRepository();
         User user = appRepository.takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         Connection.Response response = getHtml(url, user.cookie);
         appRepository.updateCookieAndViewState(ParseResponse.getCookieAndViewState(response));
@@ -208,7 +243,7 @@ public class Downloader {
     public static Connection.Response getHtml(String url) throws Exception {
         AppRepository appRepository = MyApplication.getAppRepository();
         User user = appRepository.takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         Connection.Response response = Downloader.getHtml(url, user.cookie);
         appRepository.updateCookieAndViewState(ParseResponse.getCookieAndViewState(response));
@@ -227,12 +262,12 @@ public class Downloader {
         return response;
     }
 
-    public static List<SemesterScore> downloadAllScore() throws Exception{
+    public static List<SemesterScore> downloadAllScore() throws Exception {
         getHtml(PTIT_URL.Score_URL);
 
         AppRepository appRepository = MyApplication.getAppRepository();
         User user = appRepository.takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         Connection.Response response = Jsoup.connect(PTIT_URL.Score_URL)
                 .data("__EVENTTARGET", "ctl00$ContentPlaceHolder1$ctl00$lnkChangeview2")
@@ -252,10 +287,10 @@ public class Downloader {
         return list;
     }
 
-    public static Semester downloadFirstPage() throws Exception{
+    public static Semester downloadFirstPage() throws Exception {
         AppRepository appRepository = MyApplication.getAppRepository();
         User user = appRepository.takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         String url = PTIT_URL.Schedule_URL + user.maSV;
         Connection.Response response = Downloader.getHtml(url, user.cookie);
@@ -263,18 +298,14 @@ public class Downloader {
 
         // set semester
         user = appRepository.takeUser();
-        Semester semester = ParseResponseSchedule.getSemester(response, user.maSV);
-        List<Week> weekList = ParseResponseSchedule.getWeekList(response, semester.id, user.maSV);
-
-        semester.weekList = weekList;
-
+        Semester semester = ParseResponseSchedule.getSemester(user, url, response);
         return semester;
     }
 
-    public static Semester downloadScheduleInWeeks(Semester semester, ScheduleDownloaderListener listener) throws Exception{
+    public static Semester downloadScheduleInWeeks(Semester semester, ScheduleDownloaderListener listener) throws Exception {
         AppRepository appRepository = MyApplication.getAppRepository();
         User user = appRepository.takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         String url = PTIT_URL.Schedule_URL + user.maSV;
 
@@ -286,11 +317,11 @@ public class Downloader {
             user = appRepository.takeUser();
             Week week = semester.weekList.get(i);
 
-            if(week.subjectList.isEmpty()) {
+            if (week.subjectList.isEmpty()) {
                 Connection.Response response = Downloader.postScheduleWeek(user, url, semester.semesterCode, week.value);
                 if (listener.isCanceled()) return semester;
 
-                List<Subject> subjects = ParseResponseSchedule.getSubjectList(response, week.id, semester.maSv);
+                List<Subject> subjects = ParseResponseSchedule.getSubjectList(response, week.id, week.semesterId, semester.maSv);
                 semester.weekList.get(i).subjectList = subjects;
 
                 // update cookie and viewSate
@@ -303,16 +334,18 @@ public class Downloader {
         return semester;
     }
 
-    public static Semester downloadSemester(ScheduleDownloaderListener listener) throws Exception{
+    public static Semester downloadSemester(ScheduleDownloaderListener listener) throws Exception {
         Semester semester = downloadFirstPage();
         semester = downloadScheduleInWeeks(semester, listener);
         return semester;
     }
 
-    public static List<News> downloadNewsList(int amountPage) throws Exception{
+    public static List<News> downloadNewsList(int amountPage) throws Exception {
         List<News> newsList = new ArrayList<>();
         for (int i = 1; i <= amountPage; i++) {
             Connection.Response response = Downloader.getHtml(PTIT_URL.News_URL + i, "");
+            if (response == null)
+                throw new Exception("Lỗi tải dữ liệu. Hãy kiểm tra lại kết nối mạng.");
             newsList.addAll(ParseResponseNews.convertToNews(response));
         }
         return newsList;
@@ -320,7 +353,7 @@ public class Downloader {
 
     public static Tuition downloadTuition() throws Exception {
         User user = MyApplication.getAppRepository().takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         Connection.Response response = Downloader.getHtml(PTIT_URL.Tuition_URL);
         Tuition tuition = ParseResponseTuition.convertToTuiTion(response);
@@ -328,9 +361,9 @@ public class Downloader {
         return tuition;
     }
 
-    public static List<Exam> downloadExamList() throws Exception{
+    public static List<Exam> downloadExamList() throws Exception {
         User user = MyApplication.getAppRepository().takeUser();
-        if(user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
+        if (user.maSV.isEmpty()) throw new Exception("Người dùng không xác định");
 
         Connection.Response response = getHtml(PTIT_URL.Exam_URL);
         List<Exam> examList = ParseResponseExam.convertToExamList(response, user.maSV);

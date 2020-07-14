@@ -62,25 +62,29 @@
         app:layout_constraintTop_toBottomOf="@id/appbar_layout">
 
         <!--        txt hoc ky-->
-        <TextView
-            android:id="@+id/txt_semester"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/semester_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:maxLines="2"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/background_selectable_black5_corner8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <Spinner
+                android:id="@+id/spinner_semester"
+                android:layout_width="match_parent"
+                android:dropDownWidth="260dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <!--         bar week-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_tuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/txt_semester">
+            app:layout_constraintTop_toBottomOf="@id/semester_layout">
 
             <LinearLayout
                 android:id="@+id/select_tuan"

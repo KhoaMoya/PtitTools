@@ -27,6 +27,9 @@ public interface SubjectDAO {
     @Query("Delete from subject where private = 0 and ma_sv = :maSv")
     void deleteSubjectNotPrivateOfUser(String maSv);
 
+    @Query("Delete from subject where private = 0 and semester_id=:semesterId")
+    void deleteSubjectNotPrivateOfSemester(String semesterId);
+
     @Delete
     void deleteSubject(Subject subject);
 

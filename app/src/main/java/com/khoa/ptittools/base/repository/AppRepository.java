@@ -1,7 +1,6 @@
 package com.khoa.ptittools.base.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.khoa.ptittools.MyApplication;
 import com.khoa.ptittools.base.helper.SharedPreferencesHelper;
@@ -14,7 +13,6 @@ import com.khoa.ptittools.base.model.Tuition;
 import com.khoa.ptittools.base.model.User;
 import com.khoa.ptittools.base.model.UserInfo;
 import com.khoa.ptittools.base.model.Week;
-import com.khoa.ptittools.base.util.ConvertersUtil;
 
 import java.util.List;
 
@@ -41,12 +39,19 @@ public class AppRepository extends SharedPreferencesHelper {
         appDatabase = AppDatabase.getInstance(context);
     }
 
-    public void deleteOldSemester(final Semester semester) {
-        if(semester!=null) {
+    public void deleteOldSemester(Semester semester) {
+        if (semester != null) {
             deleteSemester(semester);
-            deleteAllWeekOfUser(semester.maSv);
-            deleteSubjectNotPrivateOfUser(semester.maSv);
+            deleteAllWeekOfSemester(semester.id);
+            deleteSubjectNotPrivateOfSemester(semester.id);
         }
+    }
+
+    public void deleteAllSemester(String userId) {
+        if(userId.isEmpty()) return;
+        deleteAllSemesterOfUser(userId);
+        deleteAllWeekOfUser(userId);
+        deleteSubjectNotPrivateOfUser(userId);
     }
 
     public void saveNewSemester(Semester semester) {
@@ -57,6 +62,10 @@ public class AppRepository extends SharedPreferencesHelper {
                 insertSubject(subject);
             }
         }
+    }
+
+    public List<Semester> getAllSemesterOfUser(String maSv) {
+        return appDatabase.semesterDAO().getAllSemesterOfUser(maSv);
     }
 
     public void insertNews(News news) {
@@ -94,7 +103,7 @@ public class AppRepository extends SharedPreferencesHelper {
         appDatabase.userDAO().insertUser(user);
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         appDatabase.userDAO().updateUser(user);
     }
 
@@ -102,27 +111,35 @@ public class AppRepository extends SharedPreferencesHelper {
         appDatabase.semesterDAO().insertSemester(semester);
     }
 
+    public boolean isExistSemester(String id) {
+        return appDatabase.semesterDAO().countSemester(id) == 1;
+    }
+
     public void deleteSemester(Semester semester) {
         appDatabase.semesterDAO().deleteSemester(semester);
     }
 
+    public void deleteAllSemesterOfUser(String userId){
+        appDatabase.semesterDAO().deleteAllSemesterOfUser(userId);
+    }
+
     public void updateSemester(Semester semester) {
         User user = takeUser();
-        if(user.maSV.isEmpty()) return;
+        if (user.maSV.isEmpty()) return;
 
-        Semester oldSemester = getSemester(user.maSV);
+        Semester oldSemester = getSemester(user.maSV, semester.semesterCode);
         if (oldSemester != null) deleteOldSemester(oldSemester);
 
         if (semester != null) saveNewSemester(semester);
     }
 
-    public Semester getSemester(String userId) {
-        return appDatabase.semesterDAO().getSemester(userId);
+    public Semester getSemester(String userId, String semesterCode) {
+        return appDatabase.semesterDAO().getSemester(userId, semesterCode);
     }
 
     public void updateTuition(Tuition tuition) {
         User user = takeUser();
-        if(user.maSV.isEmpty()) return;
+        if (user.maSV.isEmpty()) return;
 
         Tuition oldTuition = getTuition(user.maSV);
         if (oldTuition != null) deleteTuition(oldTuition);
@@ -132,7 +149,7 @@ public class AppRepository extends SharedPreferencesHelper {
 
     public void updateScore(List<SemesterScore> list) {
         User user = takeUser();
-        if(user.maSV.isEmpty()) return;
+        if (user.maSV.isEmpty()) return;
         // delete old score
         deleteAllScore(user.maSV);
         // insert new score
@@ -163,6 +180,10 @@ public class AppRepository extends SharedPreferencesHelper {
         appDatabase.weekDAO().deleteAllWeekOfUser(maSv);
     }
 
+    public void deleteAllWeekOfSemester(String semesterId) {
+        appDatabase.weekDAO().deleteAllWeekOfSemester(semesterId);
+    }
+
     public List<Subject> getAllSubjects() {
         return appDatabase.subjectDAO().getAllSubjects();
     }
@@ -181,6 +202,10 @@ public class AppRepository extends SharedPreferencesHelper {
 
     public void deleteSubjectNotPrivateOfUser(String maSv) {
         appDatabase.subjectDAO().deleteSubjectNotPrivateOfUser(maSv);
+    }
+
+    public void deleteSubjectNotPrivateOfSemester(String semesterId) {
+        appDatabase.subjectDAO().deleteSubjectNotPrivateOfSemester(semesterId);
     }
 
     public void deleteSubject(Subject subject) {
@@ -204,7 +229,7 @@ public class AppRepository extends SharedPreferencesHelper {
     }
 
     public void deleteUserInfo(UserInfo userInfo) {
-        if(userInfo!=null) appDatabase.userInfoDAO().deleteUserInfo(userInfo);
+        if (userInfo != null) appDatabase.userInfoDAO().deleteUserInfo(userInfo);
     }
 
     public Tuition getTuition(String maSv) {
@@ -216,7 +241,7 @@ public class AppRepository extends SharedPreferencesHelper {
     }
 
     public void deleteTuition(Tuition tuition) {
-        if(tuition!=null) appDatabase.tuitionDAO().deleteTuition(tuition);
+        if (tuition != null) appDatabase.tuitionDAO().deleteTuition(tuition);
     }
 
     public List<SemesterScore> getSemesterScore(String maSv) {
@@ -247,21 +272,21 @@ public class AppRepository extends SharedPreferencesHelper {
         return appDatabase.examDAO().getExamList(maSv);
     }
 
-    public void updateExamList(List<Exam> list){
+    public void updateExamList(List<Exam> list) {
         User user = takeUser();
-        if(user.maSV.isEmpty()) return;
+        if (user.maSV.isEmpty()) return;
 
         deleteOldExam(user.maSV);
         insertExamList(list);
     }
 
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         appDatabase.userDAO().deleteUser(user);
     }
 
-    public void deleteAccount(User user){
+    public void deleteAccount(User user) {
         deleteUserInfo(getUserInfo(user.maSV));
-        deleteOldSemester(getSemester(user.maSV));
+        deleteAllSemester(user.maSV);
         deleteOldExam(user.maSV);
         deleteTuition(getTuition(user.maSV));
         deleteAllScore(user.maSV);

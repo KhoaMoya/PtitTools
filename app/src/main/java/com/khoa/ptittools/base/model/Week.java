@@ -45,7 +45,7 @@ public class Week implements Serializable {
         this.value = value;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.id = startDate + endDate + maSv;
+        this.id = value + "_" + semesterId;
         this.semesterId = semesterId;
         this.maSv = maSv;
         subjectList = new ArrayList<>();

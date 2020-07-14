@@ -44,7 +44,7 @@ public class LabelSubject extends Label {
         x = rect.left + paddingHorizontal;
         y = rect.top + h + paddingVertical;
 
-        if (lengths[0] > widthText) {
+        if (textPaint.measureText(roomName) > widthText) {
             canvas.drawText("...", x, y, textPaint);
             return;
         }
@@ -54,6 +54,11 @@ public class LabelSubject extends Label {
             return;
         }
 
+        // draw room name
+        canvas.drawText(roomName , x, y, textPaintRoom);
+
+        // draw subject name
+        y += h + 2*widthSpace;      // down line
         for (int i = 0; i < words.length; i++) {
 
             // new line
@@ -74,16 +79,6 @@ public class LabelSubject extends Label {
                 canvas.drawText(words[i] + " ", x, y, textPaint);
                 x += widthSpace + lengths[i];
             }
-        }
-
-
-        // draw room name
-        if ((y + h + 2*widthSpace) > (rect.bottom - paddingVertical)) {
-//            canvas.drawText("...", x, y, textPaintRoom);
-        } else {
-            x = rect.left + paddingHorizontal;
-            y += h + 2*widthSpace;
-            canvas.drawText(roomName, x, y, textPaintRoom);
         }
     }
 

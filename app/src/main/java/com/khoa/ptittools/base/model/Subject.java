@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity
-public class Subject implements Serializable {
+public class Subject implements Serializable, Comparable<Subject> {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -45,10 +45,20 @@ public class Subject implements Serializable {
 
     @ColumnInfo(name = "week_id")
     public String weekId;
+    @ColumnInfo(name="semester_id")
+    public String semesterId;
 
     @ColumnInfo(name = "ma_sv")
     public String maSv;
 
     public Subject() {
+    }
+
+    @Ignore
+    @Override
+    public int compareTo(Subject subject) {
+        if(day > subject.day) return 1;
+        else if(day < subject.day) return -1;
+        else return 0;
     }
 }

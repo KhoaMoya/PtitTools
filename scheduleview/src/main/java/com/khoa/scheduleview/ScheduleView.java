@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-public class ScheduleView extends ViewGroup implements View.OnTouchListener, View.OnLongClickListener, View.OnClickListener {
+public class ScheduleView extends View implements View.OnTouchListener, View.OnLongClickListener, View.OnClickListener {
 
     private int DEFAULT_LABEL_TEXT_COLOR = Color.WHITE;
     private int DEFAULT_LABEL_BACKGROUND_COLOR = Color.parseColor("#0286b3");

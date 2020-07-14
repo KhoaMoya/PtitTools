@@ -21,11 +21,10 @@ import androidx.core.app.NotificationManagerCompat;
 import com.khoa.ptittools.MyApplication;
 import com.khoa.ptittools.R;
 import com.khoa.ptittools.base.model.News;
-import com.khoa.ptittools.base.receiver.AutoUpdateReceiver;
-import com.khoa.ptittools.exam.view.ExamFragment;
-import com.khoa.ptittools.main.view.MainActivity;
-import com.khoa.ptittools.news.view.DetailNewsActivity;
-import com.khoa.ptittools.news.view.NewsFragment;
+import com.khoa.ptittools.ui.exam.view.ExamFragment;
+import com.khoa.ptittools.ui.main.view.MainActivity;
+import com.khoa.ptittools.ui.news.view.DetailNewsActivity;
+import com.khoa.ptittools.ui.news.view.NewsFragment;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

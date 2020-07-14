@@ -1,6 +1,5 @@
 package com.khoa.ptittools;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,17 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.khoa.ptittools.base.model.MyException;
-import com.khoa.ptittools.base.model.User;
 import com.khoa.ptittools.base.net.Downloader;
-import com.khoa.ptittools.base.repository.AppRepository;
-import com.khoa.ptittools.base.util.ParseResponse;
 import com.khoa.ptittools.databinding.ActivityTestBinding;
 
 import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;

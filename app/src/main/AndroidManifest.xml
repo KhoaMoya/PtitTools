@@ -17,6 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <receiver android:name=".widget.ScheduleAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/schedule_app_widget_info" />
+        </receiver>
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -24,6 +34,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
         <receiver
             android:name=".base.receiver.BootCompletedReceiver"
@@ -35,12 +48,12 @@
         </receiver>
 
         <activity
-            android:name=".switch_accounts.view.SwitchAccountsActivity"
+            android:name=".ui.switch_accounts.view.SwitchAccountsActivity"
             android:label="Chuyển tài khoản"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".setting.SettingsActivity"
+            android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -79,20 +92,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.view.LoginActivity"
+            android:name=".ui.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".main.view.MainActivity"
+            android:name=".ui.main.view.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".news.view.DetailNewsActivity"
-            android:parentActivityName=".main.view.MainActivity"
+            android:name=".ui.news.view.DetailNewsActivity"
+            android:parentActivityName=".ui.main.view.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".tuition.view.TuitionActivity"
-            android:parentActivityName=".main.view.MainActivity"
+            android:name=".ui.tuition.view.TuitionActivity"
+            android:parentActivityName=".ui.main.view.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Second">
 
@@ -104,8 +117,8 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".score.view.ScoreActivity"
-            android:parentActivityName=".main.view.MainActivity"
+            android:name=".ui.score.view.ScoreActivity"
+            android:parentActivityName=".ui.main.view.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Second" />
 

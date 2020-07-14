@@ -91,4 +91,14 @@ public class SharedPreferencesHelper {
     public int getCountUpdateTime() {
         return sharedPreferences.getInt("count_update_time", 0);
     }
+
+    public void setCurrentSemester(String maSv, String semesterCode){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("current_semester_"+ maSv, semesterCode);
+        editor.apply();
+    }
+
+    public String getCurrentSemesterCode(String maSv){
+        return sharedPreferences.getString("current_semester_"+ maSv, "");
+    }
 }

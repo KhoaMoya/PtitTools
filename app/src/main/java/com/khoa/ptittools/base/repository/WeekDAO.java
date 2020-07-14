@@ -31,4 +31,7 @@ public interface WeekDAO {
 
     @Query("Delete from week where ma_sv = :maSv")
     void deleteAllWeekOfUser(String maSv);
+
+    @Query("Delete from week where semester_id=:semesterId")
+    void deleteAllWeekOfSemester(String semesterId);
 }

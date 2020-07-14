@@ -28,7 +28,7 @@ import com.khoa.ptittools.base.model.Week;
         , News.class
         , Tuition.class
         , SemesterScore.class
-        , Exam.class}, version = 1, exportSchema = false)
+        , Exam.class}, version = 2, exportSchema = false)
 @TypeConverters({ConvertersSubjectTuition.class, ConvertersSubjectScore.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDAO userDAO();
@@ -45,7 +45,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static AppDatabase getInstance(Context context) {
         if (appDatabase == null) {
-            appDatabase = Room.databaseBuilder(context, AppDatabase.class, "myptit_database").build();
+            appDatabase = Room.databaseBuilder(context, AppDatabase.class, "myptit_database")
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return appDatabase;
     }

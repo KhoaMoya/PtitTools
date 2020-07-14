@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:transitionName="comtainer"
-    tools:context=".news.view.DetailNewsActivity">
+    tools:context=".ui.news.view.DetailNewsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"

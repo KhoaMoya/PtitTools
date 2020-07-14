@@ -21,4 +21,6 @@
     <!--    Preference notification-->
     <string name="show_notification">show_notification</string>
     <string name="vibrate">vibrate</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

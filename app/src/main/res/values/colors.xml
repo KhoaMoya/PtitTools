@@ -15,6 +15,7 @@
     <color name="colorBlack10">#1A000000</color>
     <color name="colorBlack5">#0D000000</color>
     <color name="colorBlack25">#40000000</color>
+    <color name="colorBlack35">#59000000</color>
     <color name="colorBlack50">#80000000</color>
     <color name="colorBlack75">#BF000000</color>
     <color name="colorGray">#E2E2E2</color>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".score.view.ScoreActivity">
+    tools:context=".ui.score.view.ScoreActivity">
 
     <include
         android:id="@+id/action_bar"
